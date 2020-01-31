@@ -46,7 +46,46 @@ Public Class f_Main
     End Sub
 #End Region
 
+#Region " Hide To Tray "
+    Private Sub HideToTray(ByVal hideApp As Boolean)
+        ShowInTaskbar = Not hideApp
+        With NotifyIcon1
+            '.Icon = New Icon(My.Application.ic, 40, 40)
+            .Icon = System.Drawing.Icon.ExtractAssociatedIcon(Application.ExecutablePath)
+            .Visible = hideApp
+            If hideApp Then
+                Dim _t As String = $"{Application.ProductName} ver. {Application.ProductVersion}"
+                .Text = _t
+                .ShowBalloonTip(2000, _t, "Running in System Tray", ToolTipIcon.Info)
+                Hide()
+            Else
+                Show()
+                WindowState = FormWindowState.Normal
+            End If
+        End With
+    End Sub
+    Private Sub NotifyIcon1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles NotifyIcon1.DoubleClick
+        If ModifierKeys <> Keys.Shift Then
+            AD()
+            Exit Sub
+        End If
+        HideToTray(False)
+    End Sub
+
+    Public Sub AD()
+        MsgBox("You don't have the rights to perform this action.", vbApplicationModal + vbExclamation, "Access Denied")
+    End Sub
+    Private Sub tsmiTray_Click(sender As Object, e As EventArgs) Handles tsmiTray.Click
+        HideToTray(True)
+    End Sub
+#End Region
+
     Private Sub tsmiClose_Click(sender As Object, e As EventArgs) Handles tsmiClose.Click
+        If ModifierKeys <> Keys.Shift Then
+            MsgBox("You have no access to this function.", vbApplicationModal + vbExclamation, "Access Denied")
+            Exit Sub
+        End If
+
         Close()
     End Sub
 
@@ -62,6 +101,9 @@ Public Class f_Main
     End Sub
 
     Private Sub f_Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Text = $"{Application.ProductName} {Application.ProductVersion}"
+        Icon = System.Drawing.Icon.ExtractAssociatedIcon(Application.ExecutablePath)
+
         If ModifierKeys <> Keys.Shift Then
             End
         Else
@@ -213,5 +255,11 @@ Public Class f_Main
 
     Private Sub tsmiClearV_Click(sender As Object, e As EventArgs) Handles tsmiClearV.Click
         rtb.Clear()
+    End Sub
+
+    Private Sub f_Main_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+        If Me.WindowState = FormWindowState.Minimized Then
+            HideToTray(True)
+        End If
     End Sub
 End Class

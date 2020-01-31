@@ -22,13 +22,18 @@ Partial Class f_Main
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.tsmiLoadDBs = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmiBackup = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiClearV = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmiSettings = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmiClose = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.tsslStatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel3 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.tv1 = New System.Windows.Forms.TreeView()
         Me.rtb = New System.Windows.Forms.RichTextBox()
@@ -36,8 +41,8 @@ Partial Class f_Main
         Me.btnExploreDir = New System.Windows.Forms.Button()
         Me.btnSelDir = New System.Windows.Forms.Button()
         Me.txtLocation = New System.Windows.Forms.TextBox()
-        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.tsmiClearV = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
+        Me.tsmiTray = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -49,7 +54,7 @@ Partial Class f_Main
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiLoadDBs, Me.tsmiBackup, Me.tsmiClearV, Me.tsmiSettings, Me.tsmiClose})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiLoadDBs, Me.tsmiBackup, Me.tsmiClearV, Me.tsmiSettings, Me.tsmiTray, Me.tsmiClose})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(800, 24)
@@ -68,6 +73,12 @@ Partial Class f_Main
         Me.tsmiBackup.Size = New System.Drawing.Size(58, 20)
         Me.tsmiBackup.Text = "Backup"
         '
+        'tsmiClearV
+        '
+        Me.tsmiClearV.Name = "tsmiClearV"
+        Me.tsmiClearV.Size = New System.Drawing.Size(90, 20)
+        Me.tsmiClearV.Text = "Clear Verbose"
+        '
         'tsmiSettings
         '
         Me.tsmiSettings.Name = "tsmiSettings"
@@ -82,7 +93,7 @@ Partial Class f_Main
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsslStatus, Me.ToolStripStatusLabel1})
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsslStatus, Me.ToolStripStatusLabel1, Me.ToolStripStatusLabel2, Me.ToolStripStatusLabel3})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 304)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(800, 22)
@@ -94,6 +105,26 @@ Partial Class f_Main
         Me.tsslStatus.Name = "tsslStatus"
         Me.tsslStatus.Size = New System.Drawing.Size(73, 17)
         Me.tsslStatus.Text = "Data Source:"
+        '
+        'ToolStripStatusLabel1
+        '
+        Me.ToolStripStatusLabel1.ForeColor = System.Drawing.Color.Blue
+        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(151, 17)
+        Me.ToolStripStatusLabel1.Text = Global.BackupSQLDB.My.MySettings.Default.dbSrc
+        '
+        'ToolStripStatusLabel2
+        '
+        Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
+        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(374, 17)
+        Me.ToolStripStatusLabel2.Spring = True
+        '
+        'ToolStripStatusLabel3
+        '
+        Me.ToolStripStatusLabel3.ForeColor = System.Drawing.Color.Navy
+        Me.ToolStripStatusLabel3.Name = "ToolStripStatusLabel3"
+        Me.ToolStripStatusLabel3.Size = New System.Drawing.Size(187, 17)
+        Me.ToolStripStatusLabel3.Text = "Created by Marc (http://marc.ma)"
         '
         'SplitContainer1
         '
@@ -184,18 +215,16 @@ Partial Class f_Main
         Me.txtLocation.TabIndex = 5
         Me.txtLocation.Text = Global.BackupSQLDB.My.MySettings.Default.buLocation
         '
-        'ToolStripStatusLabel1
+        'NotifyIcon1
         '
-        Me.ToolStripStatusLabel1.ForeColor = System.Drawing.Color.Blue
-        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(151, 17)
-        Me.ToolStripStatusLabel1.Text = Global.BackupSQLDB.My.MySettings.Default.dbSrc
+        Me.NotifyIcon1.Text = "NotifyIcon1"
+        Me.NotifyIcon1.Visible = True
         '
-        'tsmiClearV
+        'tsmiTray
         '
-        Me.tsmiClearV.Name = "tsmiClearV"
-        Me.tsmiClearV.Size = New System.Drawing.Size(90, 20)
-        Me.tsmiClearV.Text = "Clear Verbose"
+        Me.tsmiTray.Name = "tsmiTray"
+        Me.tsmiTray.Size = New System.Drawing.Size(44, 20)
+        Me.tsmiTray.Text = "Hide"
         '
         'f_Main
         '
@@ -241,4 +270,8 @@ Partial Class f_Main
     Friend WithEvents btnExploreDir As Button
     Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
     Friend WithEvents tsmiClearV As ToolStripMenuItem
+    Friend WithEvents ToolStripStatusLabel2 As ToolStripStatusLabel
+    Friend WithEvents ToolStripStatusLabel3 As ToolStripStatusLabel
+    Friend WithEvents NotifyIcon1 As NotifyIcon
+    Friend WithEvents tsmiTray As ToolStripMenuItem
 End Class
