@@ -13,7 +13,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyCompany("http://marc.ma")>
 <Assembly: AssemblyProduct("SQL Backup Tool")>
 <Assembly: AssemblyCopyright("Copyright © Marc Alfaro 2020")>
-<Assembly: AssemblyTrademark("ma_wi@live.com")>
+<Assembly: AssemblyTrademark("***@live.com")>
 
 <Assembly: ComVisible(False)>
 
